@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Rufbereitschaftsrechner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="page">
+
+    <header class="hero">
+        <p class="eyebrow">AWS Foundations · Exxeta Praxisaufgabe</p>
+        <h1>Rufbereitschaftsrechner</h1>
+        <p class="subtitle">Jürgen Kienesberger</p>
+    </header>
+
+    <main class="card">
+
+        <section class="form-section">
+            <h2>Neuen Eintrag erfassen</h2>
+
+            <form method="post" action="/add" class="form-grid">
+                <div class="field">
+                    <label for="start">Beginn</label>
+                    <input type="datetime-local" id="start" name="start" required>
+                </div>
+
+                <div class="field">
+                    <label for="end">Ende</label>
+                    <input type="datetime-local" id="end" name="end" required>
+                </div>
+
+                <div class="field">
+                    <label for="customer">Kunde</label>
+                    <input type="text" id="customer" name="customer" placeholder="z. B. Muster GmbH" required>
+                </div>
+
+                <div class="field">
+                    <label for="incident">Incidentnummer</label>
+                    <input type="text" id="incident" name="incident" placeholder="z. B. INC-12345" required>
+                </div>
+
+                <div class="actions">
+                    <button type="submit">+ Eintrag hinzufügen</button>
+                </div>
+            </form>
+
+            {% if error %}
+                <div class="error-message">
+                    <strong>Fehler:</strong> {{ error }}
+                </div>
+            {% endif %}
+
+        </section>
+
+        <section class="table-section">
+            <h2>Erfasste Rufbereitschaften</h2>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Beginn</th>
+                    <th>Ende</th>
+                    <th>Kunde</th>
+                    <th>Incident</th>
+                    <th>Dauer</th>
+                    <th>Aktion</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% if entries %}
+
+                    {% for entry in entries %}
+
+                    <tr>
+                        <td>{{ entry.start }}</td>
+                        <td>{{ entry.end }}</td>
+                        <td>{{ entry.customer }}</td>
+                        <td>{{ entry.incident }}</td>
+                        <td>{{ entry.hours }} Std. {{ entry.minutes }} Min.</td>
+                        <td>
+                            <form method="post" action="/delete/{{ loop.index0 }}">
+                                <button type="submit" class="delete-button">
+                                    Löschen
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <tr class="empty-row">
+                        <td colspan="6">Noch keine Einträge vorhanden.</td>
+                    </tr>
+
+                {% endif %}
+
+                </tbody>
+            </table>
+        </section>
+
+        <section class="summary">
+            <div>
+                <span>Gesamtdauer</span>
+                <small>Alle gültigen Einträge</small>
+            </div>
+            <strong>{{ total_hours }} Stunden {{ total_minutes }} Minuten</strong>
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
