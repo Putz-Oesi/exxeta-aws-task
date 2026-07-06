@@ -79,6 +79,17 @@ Nach der ersten Einrichtung wird die Anwendung automatisch gestartet und ist üb
 ```
 
 
+## Screenshots
+
+### Startseite
+
+![Startseite](images/startseite.png)
+
+### Anwendung mit Einträgen
+
+![Anwendung mit Einträgen](images/eintraege.png)
+
+
 ## Statusprüfung
 
 Die Anwendung stellt den Health-Endpunkt `/health` bereit. Dieser gibt bei erfolgreicher Ausführung die Antwort `OK` mit dem HTTP-Statuscode 200 zurück.
