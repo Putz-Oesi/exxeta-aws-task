@@ -83,11 +83,11 @@ Nach der ersten Einrichtung wird die Anwendung automatisch gestartet und ist üb
 
 ### Startseite
 
-![Startseite](images/startseite.png)
+![Startseite](images/startseite.jpg)
 
 ### Anwendung mit Einträgen
 
-![Anwendung mit Einträgen](images/eintraege.png)
+![Anwendung mit Einträgen](images/eintraege.jpg)
 
 
 ## Statusprüfung
